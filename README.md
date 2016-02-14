@@ -9,6 +9,7 @@ docker pull hobbsau/tvheadend
 
 ## Usage
 
+First let's setup the data container that will map the config directory from the host to the container as well as the recordings directory. This container will provide persistent storage.
 ```sh
 $ docker create \
  --name tvheadend-data \
@@ -18,17 +19,24 @@ $ docker create \
  /bin/true
 ```
 
-Example using my host:
+Example using my host and the /srv/tvheadend location on my host:
 ```sh
 $ sudo docker create --name tvheadend-data -v /srv/tvheadend/config:/config -v /srv/tvheadend/recordings:/recordings hobbsau/tvheadend
 ```
 
+Next we run the tvheadend-service and this will automatically map the volumes within the new container.
+```sh
 $ docker run -d \
  --restart=always \
  --net="host" \
  --volumes-from tvheadend-data \
  --name tvheadend-service \
  hobbsau/tvheadend
+```
+
+You should see two new containers in the docker listing:
+```sh
+$ docker ps -a
 ```
 
 ## Developing
