@@ -28,6 +28,7 @@ WORKDIR /opt/tvheadend
 RUN git checkout $TVH_BRANCH
 RUN ./configure --enable-hdhomerun_static --enable-libffmpeg_static 
 RUN make && make install
+WORKDIR /opt
 
 # Clean up packages, build-essentials and src 
 RUN rm -r /opt/tvheadend && apt-get purge -qq \
