@@ -31,7 +31,7 @@ RUN make && make install
 WORKDIR /opt
 
 # Clean up packages, build-essentials and src 
-RUN rm -r /opt/tvheadend && apt-get purge -qq \
+RUN rm -r /opt/tvheadend && apt-get purge --auto-remove -qq \
 build-essential \
 git \
 pkg-config \
