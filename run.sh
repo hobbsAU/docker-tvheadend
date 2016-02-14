@@ -10,7 +10,9 @@ sudo docker create \
  -v /srv/tvheadend/recordings:/recordings \
  hobbsau/tvheadend
 
-sudo docker run -d \                                                                                                    
+sleep 2
+
+sudo docker run -d \
  --restart=always \
  --net="host" \
  --volumes-from tvheadend-data \
