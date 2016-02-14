@@ -31,14 +31,19 @@ RUN make && make install
 WORKDIR /opt
 
 # Clean up packages, build-essentials and src 
-RUN rm -r /opt/tvheadend && apt-get purge --auto-remove -qq \
+RUN rm -r /opt/tvheadend && apt-get purge -qq \
 build-essential \
 git \
 pkg-config \
 libssl-dev \
 bzip2 \
 wget \
+libavahi-client-dev \
 zlib1g-dev \
+libavcodec-dev \
+libavutil-dev \
+libavformat-dev \
+libswscale-dev \
 python \
 gettext \
 && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
