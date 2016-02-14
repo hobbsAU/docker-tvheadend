@@ -38,12 +38,7 @@ pkg-config \
 libssl-dev \
 bzip2 \
 wget \
-libavahi-client-dev \
 zlib1g-dev \
-libavcodec-dev \
-libavutil-dev \
-libavformat-dev \
-libswscale-dev \
 python \
 gettext \
 && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
