@@ -17,12 +17,12 @@ $ docker create \
  -v <hostdir>:/recordings \
  hobbsau/tvheadend \
  /bin/true
-```
+```  
 
 Example using my host and the /srv/tvheadend location on my host:
 ```sh
 $ sudo docker create --name tvheadend-data -v /srv/tvheadend/config:/config -v /srv/tvheadend/recordings:/recordings hobbsau/tvheadend
-```
+```  
 
 Next we run the tvheadend-service and this will automatically map the volumes within the new container.
 ```sh
@@ -32,7 +32,7 @@ $ docker run -d \
  --volumes-from tvheadend-data \
  --name tvheadend-service \
  hobbsau/tvheadend
-```
+```  
 
 You should see two new containers in the docker listing:
 ```sh
@@ -40,4 +40,4 @@ $ docker ps -a
 ```
 
 ## Developing
-This repo is linked to dockerhub using autobuild. Any push to this repo will auto-update the docker image on docker hub.
+The [source repo](https://github.com/hobbsAU/docker-tvheadend) is linked to dockerhub using autobuild. Any push to this repo will auto-update the docker image on docker hub.
