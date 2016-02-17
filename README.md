@@ -1,4 +1,4 @@
-# docker-tvheadend [![Docker Pulls](https://img.shields.io/docker/pulls/hobbsau/docker-tvheadend.svg)](https://hub.docker.com/r/hobbsau/tvheadend/)
+# docker-tvheadend [![Docker Pulls](https://img.shields.io/docker/pulls/hobbsau/tvheadend.svg)](https://hub.docker.com/r/hobbsau/tvheadend/)
 
 Run tvheadend from a docker container
 
