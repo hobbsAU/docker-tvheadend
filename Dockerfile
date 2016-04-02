@@ -6,12 +6,15 @@ ENV PACKAGE "tvheadend-git tvheadend-git-dvb-scan libhdhomerun tzdata"
 RUN	echo "http://dl-6.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
 	apk add --no-cache $PACKAGE && \
 	mkdir -p /config /recordings && \
-	chown -R tvheadend:nogroup /config /recordings && \
+	chown -R tvheadend:bin /config /recordings && \
 	cp /usr/share/zoneinfo/Australia/Sydney /etc/localtime && \
 	echo "Australia/Sydney" > /etc/timezone
+
+USER tvheadend
 
 EXPOSE 9981 9982
 
 #ENTRYPOINT ["/usr/bin/tvheadend"]
-CMD ["/usr/bin/tvheadend","-C","-u","tvheadend","-g","tvheadend","-c","/config"]
+#CMD ["/usr/bin/tvheadend","-C","-u","tvheadend","-g","tvheadend","-c","/config"]
+CMD ["/usr/bin/tvheadend","-C","-c","/config"]
 

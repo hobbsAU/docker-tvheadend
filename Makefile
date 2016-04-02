@@ -11,6 +11,8 @@ CONTAINER_RUN = tvheadend-service
 # define the exportable volumes
 CONFIG_VOL = /config
 DATA_VOL = /recordings
+
+# This should point to any host directories containing the tvheadend config. The host directory must be owned by UID:GID 100:1. The format is /host/directory:
 CONFIG_BIND = /srv/tvheadend/config:
 DATA_BIND = 
 
@@ -18,10 +20,13 @@ TRIGGER_URL = https://registry.hub.docker.com/u/hobbsau/tvheadend/trigger/f774ea
 
 build:
 	@curl --data build=true -X POST $(TRIGGER_URL) 
+	@sleep 60
+	@docker pull $(CONTAINER_REPO)
 
 create-data:
-	if [ -z "`docker ps -a -q -f name=$(CONTAINER_DATA)`" ]; \
+	@if [ -z "`docker ps -a -q -f name=$(CONTAINER_DATA)`" ]; \
 	then \
+		docker pull $(CONTAINER_REPO); \
 		docker create \
  		--name $(CONTAINER_DATA) \
  		-v $(CONFIG_BIND)$(CONFIG_VOL) \
@@ -36,21 +41,40 @@ create-data:
 clean-data:
 	@if [ -z "`docker ps -a -q -f name=$(CONTAINER_DATA)`" ]; \
         then \
-		echo "Container $(CONTAINER_DATA) doesn't exist!"; \
+		echo "Nothing to remove as container $(CONTAINER_DATA) doesn't exist!"; \
 	else \
+		echo "Removing container..."; \
 		docker rm -v $(CONTAINER_DATA); \
 	fi	
 
 run: create-data
-	@docker run -d \
+	@if [ -z "`docker ps -a -q -f name=$(CONTAINER_RUN)`" ]; \
+	then \
+		docker pull $(CONTAINER_REPO); \
+		docker run -d \
  		--restart=always \
  		--net="host" \
  		--volumes-from $(CONTAINER_DATA) \
  		--name $(CONTAINER_RUN) \
- 		$(CONTAINER_REPO)
-
+ 		$(CONTAINER_REPO); \
+	else \
+		echo "$(CONTAINER_RUN) already running!"; \
+	fi
 stop:
-	@docker stop $(CONTAINER_RUN)
+	@if [ -z "`docker ps -a -q -f name=$(CONTAINER_RUN)`" ]; \
+        then \
+		echo "Nothing to stop as container $(CONTAINER_RUN) doesn't exist!"; \
+	else \
+	docker stop $(CONTAINER_RUN); \
+	fi
 
 clean: stop
-	@docker rm $(CONTAINER_RUN)
+	@if [ -z "`docker ps -a -q -f name=$(CONTAINER_RUN)`" ]; \
+        then \
+		echo "Nothing to remove as container $(CONTAINER_RUN) doesn't exist!"; \
+	else \
+	echo "Removing container..."; \
+	docker rm $(CONTAINER_RUN); \
+	fi
+
+upgrade: clean build run
