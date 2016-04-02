@@ -14,7 +14,6 @@ USER tvheadend
 
 EXPOSE 9981 9982
 
-#ENTRYPOINT ["/usr/bin/tvheadend"]
-#CMD ["/usr/bin/tvheadend","-C","-u","tvheadend","-g","tvheadend","-c","/config"]
-CMD ["/usr/bin/tvheadend","-C","-c","/config"]
+ENTRYPOINT ["/usr/bin/tvheadend"]
+CMD ["-C","-c","/config"]
 

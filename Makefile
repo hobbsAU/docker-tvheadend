@@ -8,11 +8,11 @@ CONTAINER_RUN = tvheadend-service
 # define the directory containing the original config files to be copied to the data container 
 #CONFIG_ORIG = /srv/tvheadend/config
 
-# define the exportable volumes
+# define the exportable volumes for the data container
 CONFIG_VOL = /config
 DATA_VOL = /recordings
 
-# This should point to any host directories containing the tvheadend config. The host directory must be owned by UID:GID 100:1. The format is /host/directory:
+# This should point to any host directories containing the tvheadend config. The host directory must be owned by UID:GID 100:65533. The format is /host/directory:
 CONFIG_BIND = /srv/tvheadend/config:
 DATA_BIND = 
 
