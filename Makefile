@@ -14,7 +14,7 @@ DATA_VOL = /recordings
 
 # This should point to any host directories containing the tvheadend config. The host directory must be owned by UID:GID 100:65533. The format is /host/directory:
 CONFIG_BIND = /srv/tvheadend/config:
-DATA_BIND = 
+DATA_BIND = /srv/tvheadend/recordings:
 
 TRIGGER_URL = https://registry.hub.docker.com/u/hobbsau/tvheadend/trigger/f774eaab-19a9-4144-ac60-596199fa77fa/
 
@@ -60,12 +60,15 @@ run: create-data
 	else \
 		echo "$(CONTAINER_RUN) already running!"; \
 	fi
+
+# Service container is ephemeral so let's delete on stop. Data container is persistent so we do not touch
 stop:
 	@if [ -z "`docker ps -q -f name=$(CONTAINER_RUN)`" ]; \
         then \
 		echo "Nothing to stop as container $(CONTAINER_RUN) isn't running!"; \
 	else \
 	docker stop $(CONTAINER_RUN); \
+	docker rm $(CONTAINER_RUN); \
 	fi
 
 clean: stop
