@@ -10,16 +10,15 @@ Key features of this repository:
 
 ## Prerequisites
 To use this package you must ensure the following:
-* Linux host system configured
-* Docker working
-* make installed
-* git installed
+* Linux host system configured with Docker working
+* make installed (optional for management script)
+* git installed (optional for src and management script)
 
 
 ## Installation - including management scripts and src
 ```sh
 	git clone https://github.com/hobbsAU/docker-tvheadend.git
-	cd tvheadend
+	cd docker-tvheadend
 	make run
 ```
 

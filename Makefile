@@ -48,7 +48,7 @@ clean-data:
 	fi	
 
 run: create-data
-	@if [ -z "`docker ps -a -q -f name=$(CONTAINER_RUN)`" ]; \
+	@if [ -z "`docker ps -q -f name=$(CONTAINER_RUN)`" ]; \
 	then \
 		docker pull $(CONTAINER_REPO); \
 		docker run -d \
@@ -61,9 +61,9 @@ run: create-data
 		echo "$(CONTAINER_RUN) already running!"; \
 	fi
 stop:
-	@if [ -z "`docker ps -a -q -f name=$(CONTAINER_RUN)`" ]; \
+	@if [ -z "`docker ps -q -f name=$(CONTAINER_RUN)`" ]; \
         then \
-		echo "Nothing to stop as container $(CONTAINER_RUN) doesn't exist!"; \
+		echo "Nothing to stop as container $(CONTAINER_RUN) isn't running!"; \
 	else \
 	docker stop $(CONTAINER_RUN); \
 	fi
