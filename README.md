@@ -2,7 +2,28 @@
 
 Run tvheadend from a docker container
 
-## Install
+Key features of this repository:
+* Efficiency - image is only ~25MB
+* Security - tvheadend runs as regular user and so does the docker image with the USER directive
+* Persistence - data-container used for config and recording persistence
+* Management - make script allows for easy configuration and ongoing maintenance
+
+## Prerequisites
+To use this package you must ensure the following:
+* Linux host system configured
+* Docker working
+* make installed
+* git installed
+
+
+## Installation - including management scripts and src
+```sh
+	git clone https://github.com/hobbsAU/docker-tvheadend.git
+	cd tvheadend
+	make run
+```
+
+## Installation - standalone Docker image
 ```sh
 docker pull hobbsau/tvheadend
 ```
