@@ -2,8 +2,8 @@
 
 # define docker container
 CONTAINER_REPO = hobbsau/tvheadend
-CONTAINER_DATA = tvheadend-data
 CONTAINER_RUN = tvheadend-service
+CONTAINER_DATA = tvheadend-data
 
 # define the directory containing the original config files to be copied to the data container 
 #CONFIG_ORIG = /srv/tvheadend/config
@@ -20,8 +20,6 @@ TRIGGER_URL = https://registry.hub.docker.com/u/hobbsau/tvheadend/trigger/f774ea
 
 build:
 	@curl --data build=true -X POST $(TRIGGER_URL) 
-	@sleep 60
-	@docker pull $(CONTAINER_REPO)
 
 create-data:
 	@if [ -z "`docker ps -a -q -f name=$(CONTAINER_DATA)`" ]; \
