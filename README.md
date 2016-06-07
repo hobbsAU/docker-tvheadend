@@ -27,7 +27,35 @@ To use this package you must ensure the following:
 docker pull hobbsau/tvheadend
 ```
 
-## Usage
+## Usage - using management scripts
+
+### Creating and running the container
+```sh
+$ make run
+```
+
+### Stopping a running container
+```sh
+$ make stop
+```
+
+### Starting a stopped container
+```sh
+$ make start
+```
+
+### Destroying (deleting) a running or stopped container
+```sh
+$ make clean
+```
+
+### Remotely trigger a container rebuild
+```sh
+$ make build
+```
+
+
+## Usage - standalone Docker image
 
 First let's setup the data container that will map the config directory from the host to the container as well as the recordings directory. This container will provide persistent storage.
 ```sh
