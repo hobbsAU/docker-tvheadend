@@ -1,6 +1,6 @@
 FROM alpine:edge
 MAINTAINER Adrian Hobbs <adrianhobbs@gmail.com>
-ENV PACKAGE "tvheadend-git tvheadend-git-dvb-scan libhdhomerun tzdata"
+ENV PACKAGE "tvheadend tvheadend-dvb-scan libhdhomerun tzdata"
 
 # Update packages in base image, avoid caching issues by combining statements, install build software and deps
 RUN	echo "http://dl-6.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
